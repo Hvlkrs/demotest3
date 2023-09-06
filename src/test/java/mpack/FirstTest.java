@@ -1,24 +1,26 @@
 package mpack;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
 public class FirstTest {
+
+    WebDriver driver;
+
     @Test
-    public void mOne() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://www.amazon.de/");
-        //  driver.findElement(By.id("//*[@id=\"a-autoid-0\"]")).click();
-        //  driver.findElement(By.id("//*[@id=\"nav-logo-sprites\"]")).click();
-
-        driver.close();
-
+    public void verifyTitle() {
+//WebDriverManager.chromedriver().setup();
+        ChromeOptions options=new ChromeOptions();
+        options.addArguments("headless");
+        driver=new ChromeDriver(options);
+        driver.get("https://www.browserstack.com/");
+        System.out.println("Title is: " +driver.getTitle());
+        Assert.assertEquals(driver.getTitle(), "Most Reliable App & Cross Browser Testing Platform | BrowserStack");
+        driver.quit();
     }
 }
