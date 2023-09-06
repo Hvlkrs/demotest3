@@ -7,23 +7,16 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
 public class SecondTest {
-    /*
-    Create tests that depend on each other
-    Create beforeClass and set up settings.
-    By creating interdependent tests;
-    First go to Facebook.
-    Then go to Google depending on Facebook,
-    Then go to Amazon depending on Google
-    Close the driver.
-     */
     static WebDriver driver;
     @BeforeClass
     public static void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
     @Test
     void test1() {
